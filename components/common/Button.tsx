@@ -26,6 +26,7 @@ export default function Button({
        ${className}`}
       {...props}
     >
+      {Icon && <Icon className={`text-lg ${children ? "mr-1" : ""}`} />}
       {children}
     </button>
   );
