@@ -4,6 +4,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { MdCheck, MdClose, MdDeleteOutline } from "react-icons/md";
 import { PiChatBold, PiTrashBold } from "react-icons/pi";
 import { groupByDate } from "@/components/common/utils";
+import ChatItem from "./ChatItem";
 
 export default function ChatList() {
   const [ChatList, setChatList] = useState<Chat[]>([
@@ -102,27 +103,14 @@ export default function ChatList() {
                 const selected = selectedChat?.id === item.id;
 
                 return (
-                  <li
-                    onClick={() => {
-                      setSelectedChat(item);
-                    }}
+                  <ChatItem
                     key={item.id}
-                    className={`group flex items-center p-3 space-x-3 cursor-pointer hover:bg-gray-800${
-                      selected ? "bg-gray-800" : ""
-                    }`}
-                  >
-                    <div>
-                      <PiChatBold />
-                    </div>
-                    <div className="relative flex-1 whitespace-nowrap overflow-hidden">
-                      {item.title}
-                      <span
-                        className={`group-hover:from-gray-800 absolute right-0 inset-y-0 w-8 from-gray-900 bg-gradient-to-l ${
-                          selected ? "from-gray-800" : ""
-                        }`}
-                      ></span>
-                    </div>
-                  </li>
+                    item={item}
+                    selected={selected}
+                    onSelected={(chat) => {
+                      setSelectedChat(chat);
+                    }}
+                  />
                 );
               })}
             </ul>
